@@ -1,0 +1,26 @@
+{
+  "name": "Random Fill",
+  "description": "Fill input with random text",
+  "version": "0.1",
+  "permissions": ["tabs", "<all_urls>"],
+  "content_scripts": [
+    {
+      "matches": ["http://*/*", "https://*/*"],
+      "js": ["content.js"],
+      "run_at": "document_end"
+    }
+  ],
+  "background": {
+    "scripts": ["background.js"]
+  },
+  "commands": {
+    "random-fill": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+F",
+        "mac": "Command+Shift+F"
+      },
+      "description": "Toggle feature foo"
+    }
+  },
+  "manifest_version": 2
+}
