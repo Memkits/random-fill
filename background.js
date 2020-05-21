@@ -698,19 +698,31 @@ let chars = "QWERTYUIOPAJKLXVNM1234567890";
 
 // TODO
 
+let randomZh = () => {
+  return zhCities[Math.floor(zhCities.length * Math.random())];
+};
+
+let randomEn = () => {
+  return enCities[Math.floor(enCities.length * Math.random())];
+};
+
+let randomCode = () => {
+  let len = 1 + Math.random() * 5;
+  let buffer = "";
+  for (let i = 0; i < len; i++) {
+    buffer += chars[Math.floor(chars.length * Math.random())];
+  }
+  return buffer;
+};
+
 let randomPiece = () => {
   let x = Math.random() * 3;
   if (x > 2) {
-    return zhCities[Math.floor(zhCities.length * Math.random())];
+    return randomZh();
   } else if (x > 1) {
-    return enCities[Math.floor(enCities.length * Math.random())];
+    return randomEn();
   } else {
-    let len = 1 + Math.random() * 5;
-    let buffer = "";
-    for (let i = 0; i < len; i++) {
-      buffer += chars[Math.floor(chars.length * Math.random())];
-    }
-    return buffer;
+    return randomCode();
   }
 };
 
@@ -721,6 +733,35 @@ chrome.commands.onCommand.addListener((command) => {
       chrome.tabs.sendMessage(
         tabs[0].id,
         { action: "random-fill", text: randomPiece() },
+        function (response) {
+          // console.log(response);
+        }
+      );
+    });
+  }
+});
+
+chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
+  if (request.action == "popup-fill") {
+    sendResponse({ action: "pong" });
+
+    let text = "TODO";
+    switch (request.data) {
+      case "zh":
+        text = randomZh();
+        break;
+      case "en":
+        text = randomEn();
+        break;
+      case "code":
+        text = randomCode();
+        break;
+    }
+
+    chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+      chrome.tabs.sendMessage(
+        tabs[0].id,
+        { action: "random-fill", text: text },
         function (response) {
           // console.log(response);
         }
