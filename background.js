@@ -745,7 +745,7 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
   if (request.action == "popup-fill") {
     sendResponse({ action: "pong" });
 
-    let text = "TODO";
+    let text = request.data;
     switch (request.data) {
       case "zh":
         text = randomZh();

@@ -3,11 +3,32 @@
 <div id="zh" class="item">Zh</div>
 <div id="en" class="item">En</div>
 <div id="code" class="item">code</div>
+<div class="row">
+  <div id="dash-sep" class="tip">-</div>
+  <div id="blank-sep" class="tip">◻</div>
+  <div id="no-sep" class="tip">∅</div>
+</div>
 
 <style>
   .item {
     padding: 4px 8px;
     font-size: 14px;
     cursor: pointer;
+  }
+  .row {
+    display: flex;
+  }
+  .tip {
+    margin: 2px 2px;
+    padding: 2px 2px;
+    font-size: 16px;
+    display: inline-block;
+    white-space: nowrap;
+    font-family: monospace;
+    cursor: pointer;
+  }
+  .item:hover,
+  .tip:hover {
+    background-color: #ccc;
   }
 </style>
