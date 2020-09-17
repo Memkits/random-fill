@@ -25,4 +25,34 @@ window.onload = () => {
       }
     );
   };
+
+  document.getElementById("dash-sep").onclick = () => {
+    chrome.runtime.sendMessage(
+      { action: "popup-fill", data: "@dash-sep" },
+      (response) => {
+        console.log(response);
+        window.close();
+      }
+    );
+  };
+
+  document.getElementById("blank-sep").onclick = () => {
+    chrome.runtime.sendMessage(
+      { action: "popup-fill", data: "@blank-sep" },
+      (response) => {
+        console.log(response);
+        window.close();
+      }
+    );
+  };
+
+  document.getElementById("no-sep").onclick = () => {
+    chrome.runtime.sendMessage(
+      { action: "popup-fill", data: "@no-sep" },
+      (response) => {
+        console.log(response);
+        window.close();
+      }
+    );
+  };
 };
